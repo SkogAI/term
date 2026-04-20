@@ -1,5 +1,7 @@
 import type { PluginInstall } from '../core/kernel.js';
-import siteContent from '../me/site-content.js';
+import about from '../me/about.js';
+import contact from '../me/contact.js';
+import pwnProfile from '../me/pwn-profile.js';
 import welcome from '../me/welcome.js';
 import bashHistory from './bash-history.js';
 import bootSplash from './boot-splash.js';
@@ -31,7 +33,9 @@ export const plugins: PluginInstall[] = [
   root,
   usr,
   varPlugin,
-  siteContent,
+  about,
+  contact,
+  pwnProfile,
   proc,
   dev,
   coreutils,
