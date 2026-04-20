@@ -1,6 +1,7 @@
 import { red } from '../core/color.js';
 import type { PluginInstall } from '../core/kernel.js';
 import type { Ctx } from '../core/shell.js';
+import { system } from '../system.js';
 
 const CSS = `
 body.rm-egg-invert .terminal { filter: invert(1) hue-rotate(180deg); }
@@ -37,11 +38,13 @@ const parseFlags = (args: string[]): Set<string> => {
   return flags;
 };
 
+const rootPart = system.hardware.storage.partitions[1];
+
 const EGG_ERRORS = [
-  '[ 42.131] EXT4-fs error (device nvme0n1p2): ext4_lookup:1611: comm rm: deleted inode referenced: 9',
-  '[ 42.132] I/O error, dev nvme0n1, sector 1337 op 0x1:(WRITE) flags 0x8800 phys_seg 1',
-  '[ 42.140] Buffer I/O error on device nvme0n1p2, logical block 0',
-  '[ 42.145] Aborting journal on device nvme0n1p2-8.',
+  `[ 42.131] EXT4-fs error (device ${rootPart}): ext4_lookup:1611: comm rm: deleted inode referenced: 9`,
+  `[ 42.132] I/O error, dev ${system.hardware.storage.device}, sector 1337 op 0x1:(WRITE) flags 0x8800 phys_seg 1`,
+  `[ 42.140] Buffer I/O error on device ${rootPart}, logical block 0`,
+  `[ 42.145] Aborting journal on device ${rootPart}-8.`,
   "[ 42.151] systemd[1]: local-fs.target: Failed with result 'exit-code'.",
 ];
 const ERROR_TICKS = [8, 16, 24, 32, 40];

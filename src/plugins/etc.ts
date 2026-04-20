@@ -25,10 +25,10 @@ const install: PluginInstall = kernel => {
         `NAME="${system.os.name}"\n` +
           `PRETTY_NAME="${system.os.prettyName}"\n` +
           `ID=${system.os.id}\n` +
-          'BUILD_ID=rolling\n' +
+          `BUILD_ID=${system.os.buildId}\n` +
           `HOME_URL="${system.os.homeUrl}"`
       ),
-      'resolv.conf': file('nameserver 127.0.0.1'),
+      'resolv.conf': file(`nameserver ${system.network.nameserver}`),
     });
 
   kernel.registerMount(treeMount('/etc', buildEtc));

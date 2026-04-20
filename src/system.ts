@@ -3,6 +3,7 @@ export const system = {
     name: 'Arch Linux',
     prettyName: 'Arch Linux',
     id: 'arch',
+    buildId: 'rolling',
     homeUrl: 'https://archlinux.org/',
   },
   kernel: {
@@ -27,7 +28,14 @@ export const system = {
       cacheKB: 1024,
     },
     memoryMB: 32768,
-    storage: 'WD_BLACK SN770 1TB',
+    storage: {
+      model: 'WD_BLACK SN770 1TB',
+      device: 'nvme0n1',
+      partitions: ['nvme0n1p1', 'nvme0n1p2', 'nvme0n1p3'],
+    },
+  },
+  network: {
+    nameserver: '127.0.0.1',
   },
   firmware: {
     vendor: 'InsydeH2O',

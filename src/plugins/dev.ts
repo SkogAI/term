@@ -9,6 +9,7 @@ import type {
   VfsResult,
 } from '../core/vfs.js';
 import { dir, file } from '../core/vfs.js';
+import { system } from '../system.js';
 
 const CHAR_SPECIAL = 'character special';
 const BLOCK_SPECIAL = 'block special';
@@ -83,25 +84,21 @@ const SPEC: Record<string, DevSpec> = {
     mode: 0o600,
     writePolicy: 'readonly',
   },
-  nvme0n1: {
-    content: '',
-    fileType: BLOCK_SPECIAL,
-    mode: 0o660,
-    writePolicy: 'readonly',
-  },
-  nvme0n1p1: {
-    content: '',
-    fileType: BLOCK_SPECIAL,
-    mode: 0o660,
-    writePolicy: 'readonly',
-  },
-  nvme0n1p2: {
-    content: '',
-    fileType: BLOCK_SPECIAL,
-    mode: 0o660,
-    writePolicy: 'readonly',
-  },
 };
+
+const nvmeSpec: DevSpec = {
+  content: '',
+  fileType: BLOCK_SPECIAL,
+  mode: 0o660,
+  writePolicy: 'readonly',
+};
+
+for (const name of [
+  system.hardware.storage.device,
+  ...system.hardware.storage.partitions,
+]) {
+  SPEC[name] = nvmeSpec;
+}
 
 const specToNode = (spec: DevSpec): FileNode =>
   file(spec.content, spec.fileType, { mode: spec.mode });

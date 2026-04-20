@@ -11,8 +11,8 @@ const install: PluginInstall = kernel => {
         syslog: file(
           `[  0.000000] Linux version ${system.kernel.version}\n` +
             `[  0.123456] Booting ${hostname} ...\n` +
-            '[  1.234567] nvme0n1p2: mounted successfully\n' +
-            '[  1.345678] nvme0n1p3: mounted successfully\n' +
+            `[  1.234567] ${system.hardware.storage.partitions[1]}: mounted successfully\n` +
+            `[  1.345678] ${system.hardware.storage.partitions[2]}: mounted successfully\n` +
             '[  2.456789] All systems nominal'
         ),
         'auth.log': file(

@@ -51,7 +51,7 @@ const install: PluginInstall = kernel => {
     { type: 'line', text: '' },
     { type: 'delay', ms: 150 },
     { type: 'line', text: 'Detecting NVMe devices ...' },
-    { type: 'line', text: `  NVMe 0   : ${system.hardware.storage}` },
+    { type: 'line', text: `  NVMe 0   : ${system.hardware.storage.model}` },
     { type: 'line', text: `  NVMe 1   : ${dim('<None>')}` },
     { type: 'line', text: '' },
     { type: 'line', text: 'USB Device(s)    : 1 Keyboard' },
