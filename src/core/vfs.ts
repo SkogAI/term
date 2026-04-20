@@ -83,6 +83,7 @@ export type StatResult = VfsResult<{
 
 export type Vfs = {
   registerMount(mount: Mount): void;
+  appendDir(absPath: string, children: Record<string, VfsNode>): void;
   resetVfs(): void;
   resolve(pathStr: string, cwd: string, identity: IdentityLike): ResolveResult;
   read(pathStr: string, cwd: string, identity: IdentityLike): ReadResult;
@@ -166,6 +167,15 @@ export const file = (
 
 export const contentOf = (node: FileNode): string =>
   typeof node.content === 'function' ? node.content() : node.content;
+
+export const asGuest = <T extends VfsNode>(node: T): T => {
+  node.owner = GUEST;
+  node.group = GUEST;
+  if (node.type === 'dir') {
+    Object.values(node.children).forEach(asGuest);
+  }
+  return node;
+};
 
 export function treeMount(path: string, buildRoot: () => DirNode): Mount {
   let root = buildRoot();
@@ -286,6 +296,7 @@ export function treeMount(path: string, buildRoot: () => DirNode): Mount {
 
 export function createVfs(): Vfs {
   const mounts: Mount[] = [];
+  const appended = new Map<string, Record<string, VfsNode>>();
 
   const sortMounts = () => {
     mounts.sort((a, b) => b.path.length - a.path.length);
@@ -296,10 +307,41 @@ export function createVfs(): Vfs {
     sortMounts();
   };
 
+  const applyAppended = () => {
+    for (const [absPath, children] of appended) {
+      const node = rawResolve(absPath);
+      if (node && node.type === 'dir') {
+        Object.assign(node.children, children);
+      }
+    }
+  };
+
+  const appendDir = (
+    absPath: string,
+    children: Record<string, VfsNode>
+  ): void => {
+    const node = rawResolve(absPath);
+    if (!node) {
+      throw new Error(`appendDir: ${absPath} does not exist`);
+    }
+    if (node.type !== 'dir') {
+      throw new Error(`appendDir: ${absPath} is not a directory`);
+    }
+    const existing = appended.get(absPath) ?? {};
+    for (const name of Object.keys(children)) {
+      if (node.children[name] || existing[name]) {
+        throw new Error(`appendDir: ${absPath}/${name} already exists`);
+      }
+    }
+    appended.set(absPath, { ...existing, ...children });
+    Object.assign(node.children, children);
+  };
+
   const resetVfs = () => {
     for (const m of mounts) {
       m.rebuild?.();
     }
+    applyAppended();
   };
 
   const normalize = (pathStr: string, cwd: string): string | null => {
@@ -563,6 +605,7 @@ export function createVfs(): Vfs {
 
   return {
     registerMount,
+    appendDir,
     resetVfs,
     resolve,
     read,

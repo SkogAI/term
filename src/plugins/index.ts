@@ -7,6 +7,7 @@ import colortest from './colortest.js';
 import coreutils from './coreutils.js';
 import dev from './dev.js';
 import etc from './etc.js';
+import filesystem from './filesystem.js';
 import find from './find.js';
 import fortune from './fortune.js';
 import fsutils from './fsutils.js';
@@ -23,6 +24,7 @@ import version from './version.js';
 
 export const plugins: PluginInstall[] = [
   etc,
+  filesystem,
   siteContent,
   proc,
   dev,
