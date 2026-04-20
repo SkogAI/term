@@ -1,5 +1,6 @@
 import type { PluginInstall } from '../core/kernel.js';
 import { dir, file, treeMount } from '../core/vfs.js';
+import { system } from '../system.js';
 
 const install: PluginInstall = kernel => {
   const hostname = kernel.identity.current().hostname;
@@ -8,7 +9,7 @@ const install: PluginInstall = kernel => {
     dir({
       log: dir({
         syslog: file(
-          '[  0.000000] Linux version 6.11.5-arch1-1\n' +
+          `[  0.000000] Linux version ${system.kernel.version}\n` +
             `[  0.123456] Booting ${hostname} ...\n` +
             '[  1.234567] nvme0n1p2: mounted successfully\n' +
             '[  1.345678] nvme0n1p3: mounted successfully\n' +

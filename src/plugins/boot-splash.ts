@@ -1,5 +1,6 @@
 import { brightCyan, dim, green } from '../core/color.js';
 import type { PluginInstall } from '../core/kernel.js';
+import { system } from '../system.js';
 
 type LineStep = { type: 'line'; text: string };
 type DelayStep = { type: 'delay'; ms: number };
@@ -24,24 +25,24 @@ const install: PluginInstall = kernel => {
   const bootSteps = (): BootStep[] => [
     {
       type: 'line',
-      text: 'InsydeH2O UEFI Firmware v03.03  (c) 2024, Insyde Software Corp.',
+      text: `${system.firmware.vendor} UEFI Firmware v${system.firmware.version}  (c) ${system.firmware.year}, ${system.firmware.copyright}`,
     },
-    { type: 'line', text: 'Framework Laptop 13 (AMD Ryzen AI 300 Series)' },
+    { type: 'line', text: system.hardware.name },
     { type: 'line', text: '' },
     { type: 'delay', ms: 120 },
     {
       type: 'line',
-      text: 'CPU    : AMD Ryzen AI 9 HX 370 w/ Radeon 890M @ 5.1 GHz',
+      text: `CPU    : ${system.hardware.cpu.model} @ ${system.hardware.cpu.mhz / 1000} GHz`,
     },
     {
       type: 'line',
-      text: `Cache  : L1 768K, L2 12M, L3 24M  ${green('Enabled')}`,
+      text: `Cache  : ${system.hardware.cpu.cache}  ${green('Enabled')}`,
     },
     {
       type: 'counter',
       prefix: 'Memory : Testing ... ',
       from: 0,
-      to: 32768,
+      to: system.hardware.memoryMB,
       step: 2048,
       unit: 'M',
       done: `M ${green('OK')}`,
@@ -50,7 +51,7 @@ const install: PluginInstall = kernel => {
     { type: 'line', text: '' },
     { type: 'delay', ms: 150 },
     { type: 'line', text: 'Detecting NVMe devices ...' },
-    { type: 'line', text: '  NVMe 0   : WD_BLACK SN770 1TB' },
+    { type: 'line', text: `  NVMe 0   : ${system.hardware.storage}` },
     { type: 'line', text: `  NVMe 1   : ${dim('<None>')}` },
     { type: 'line', text: '' },
     { type: 'line', text: 'USB Device(s)    : 1 Keyboard' },

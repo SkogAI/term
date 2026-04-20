@@ -1,5 +1,6 @@
 import type { PluginInstall } from '../core/kernel.js';
 import { dir, file, treeMount } from '../core/vfs.js';
+import { system } from '../system.js';
 
 const install: PluginInstall = kernel => {
   const buildEtc = () =>
@@ -21,11 +22,11 @@ const install: PluginInstall = kernel => {
         'before enlightenment, chop wood, carry water.\nafter enlightenment, chop wood, carry water.'
       ),
       'os-release': file(
-        'NAME="Arch Linux"\n' +
-          'PRETTY_NAME="Arch Linux"\n' +
-          'ID=arch\n' +
+        `NAME="${system.os.name}"\n` +
+          `PRETTY_NAME="${system.os.prettyName}"\n` +
+          `ID=${system.os.id}\n` +
           'BUILD_ID=rolling\n' +
-          'HOME_URL="https://archlinux.org/"'
+          `HOME_URL="${system.os.homeUrl}"`
       ),
       'resolv.conf': file('nameserver 127.0.0.1'),
     });

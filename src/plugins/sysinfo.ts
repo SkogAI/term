@@ -1,6 +1,7 @@
 import { red } from '../core/color.js';
 import type { PluginInstall } from '../core/kernel.js';
 import type { Ctx } from '../core/shell.js';
+import { system } from '../system.js';
 
 const MONTHS = [
   'Jan',
@@ -25,29 +26,29 @@ const formatMtime = (d: Date): string => {
   return `${mo} ${day} ${hh}:${mm}`;
 };
 
-const PANIC_LINES = [
-  '',
-  '[  ---  KERNEL PANIC  ---  ]',
-  '',
-  'Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000009',
-  'CPU: 0 PID: 1 Comm: init Not tainted 6.11.5-arch1-1 #1',
-  'Hardware name: Framework Laptop 13 (AMD Ryzen AI 300 Series)/FRANMDCP09, BIOS 03.03 2024',
-  'Call Trace:',
-  '  <TASK>',
-  '  dump_stack_lvl+0x44/0x5c',
-  '  panic+0x196/0x2f4',
-  '  do_exit.cold+0x14/0x14',
-  '  do_group_exit+0x2d/0x90',
-  '  __x64_sys_exit_group+0x14/0x20',
-  '  do_syscall_64+0x37/0x90',
-  '  entry_SYSCALL_64_after_hwframe+0x63/0xcd',
-  '  </TASK>',
-  '',
-  'Kernel Offset: 0x1e600000 from 0xffffffff81000000',
-  '---[ end Kernel panic - not syncing ]---',
-];
-
 const install: PluginInstall = kernel => {
+  const panicLines = [
+    '',
+    '[  ---  KERNEL PANIC  ---  ]',
+    '',
+    'Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000009',
+    `CPU: 0 PID: 1 Comm: init Not tainted ${system.kernel.version} #1`,
+    `Hardware name: ${system.hardware.name}/${system.hardware.boardTag}, BIOS ${system.firmware.version} ${system.firmware.year}`,
+    'Call Trace:',
+    '  <TASK>',
+    '  dump_stack_lvl+0x44/0x5c',
+    '  panic+0x196/0x2f4',
+    '  do_exit.cold+0x14/0x14',
+    '  do_group_exit+0x2d/0x90',
+    '  __x64_sys_exit_group+0x14/0x20',
+    '  do_syscall_64+0x37/0x90',
+    '  entry_SYSCALL_64_after_hwframe+0x63/0xcd',
+    '  </TASK>',
+    '',
+    'Kernel Offset: 0x1e600000 from 0xffffffff81000000',
+    '---[ end Kernel panic - not syncing ]---',
+  ];
+
   kernel.installExecutable('/bin/uname', {
     describe: 'print system information',
     exec(ctx) {
@@ -58,7 +59,7 @@ const install: PluginInstall = kernel => {
       }
       const hostname = kernel.identity.current().hostname;
       ctx.out(
-        `Linux ${hostname} 6.11.5-arch1-1 #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux\n`
+        `Linux ${hostname} ${system.kernel.version} ${system.kernel.build} ${system.kernel.arch} GNU/Linux\n`
       );
       return 0;
     },
@@ -136,7 +137,7 @@ const install: PluginInstall = kernel => {
   });
 
   const panic = async (ctx: Ctx): Promise<void> => {
-    for (const line of PANIC_LINES) {
+    for (const line of panicLines) {
       ctx.out(red(line || '\u00a0') + '\n');
       await ctx.sleep(80);
     }
