@@ -1,0 +1,27 @@
+import type { PluginInstall } from '../core/kernel.js';
+import { dir, file, treeMount } from '../core/vfs.js';
+
+const buildVar = () =>
+  dir({
+    log: dir({
+      syslog: file(
+        '[  0.000000] Linux version 6.11.5-arch1-1\n' +
+          '[  0.123456] Booting jpinillos.dev ...\n' +
+          '[  1.234567] nvme0n1p2: mounted successfully\n' +
+          '[  1.345678] nvme0n1p3: mounted successfully\n' +
+          '[  2.456789] All systems nominal'
+      ),
+      'auth.log': file(
+        'Apr 16 03:14:07 jpinillos sshd[1337]: Failed password for root from 192.168.1.42 port 22 ssh2\n' +
+          'Apr 16 03:14:12 jpinillos sshd[1337]: Failed password for root from 192.168.1.42 port 22 ssh2\n' +
+          'Apr 16 03:14:15 jpinillos sudo: guest : user NOT in sudoers ; TTY=pts/0 ; PWD=/home/guest ; COMMAND=/bin/bash\n' +
+          'Apr 16 03:14:20 jpinillos sshd[1337]: Accepted publickey for guest from 10.0.0.1 port 22 ssh2'
+      ),
+    }),
+  });
+
+const install: PluginInstall = kernel => {
+  kernel.registerMount(treeMount('/var', buildVar));
+};
+
+export default install;

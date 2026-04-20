@@ -7,24 +7,30 @@ import colortest from './colortest.js';
 import coreutils from './coreutils.js';
 import dev from './dev.js';
 import etc from './etc.js';
-import filesystem from './filesystem.js';
 import find from './find.js';
 import fortune from './fortune.js';
 import fsutils from './fsutils.js';
+import home from './home.js';
 import identity from './identity.js';
 import posthog from './posthog.js';
 import proc from './proc.js';
 import projects from './projects.js';
 import pwn from './pwn.js';
 import rmEgg from './rm-egg.js';
+import root from './root.js';
 import sysinfo from './sysinfo.js';
 import text from './text.js';
 import theme from './theme.js';
+import usr from './usr.js';
+import varPlugin from './var.js';
 import version from './version.js';
 
 export const plugins: PluginInstall[] = [
   etc,
-  filesystem,
+  home,
+  root,
+  usr,
+  varPlugin,
   siteContent,
   proc,
   dev,
