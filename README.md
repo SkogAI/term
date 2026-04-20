@@ -1,10 +1,11 @@
 # Shell Website
 
-A self-contained, client-side terminal you can deploy as a personal website.
-Ships with a real shell (pipes, redirects, globs, history, tab completion), an
-in-memory filesystem with permissions, a plugin-based command system, multiple
-themes, and a full ANSI rendering pipeline. Everything runs in the browser, no
-server, no runtime other than static files.
+[![CI](https://github.com/jazho76/shellwebsite/actions/workflows/ci.yml/badge.svg)](https://github.com/jazho76/shellwebsite/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+A personal website that looks and feels like a shell. Your content is served
+as commands and files. Everything runs in the browser, no server, no runtime
+other than static files.
 
 **Demo:** [jpinillos.dev](https://jpinillos.dev). Fork it, strip my content,
 drop in yours.
@@ -25,6 +26,36 @@ drop in yours.
 
 ## Features
 
+**Your content, as commands and files**
+
+- Bio + links served as the landing `welcome` command
+- Content commands: `about`, `projects` (live GitHub repo list), plus any
+  you add
+- Content files: `~/about.txt`, `~/contact.txt`
+- Markdown-style links (`[text](url)`) render as clickable anchors
+- Edit in `src/plugins/me/*.ts` and `src/config.ts`
+
+**Themes**
+
+Framework themes: `cappuccino`, `crt`, `dracula`, `graphite`, `gruvbox`,
+`matrix`, `nord`, `synthwave`, `tokyo-night`. Plus `jazho76` as an example
+of a custom theme. Swap at runtime via `theme <name>`. One
+module per theme. Update `src/themes/index.ts` to add your own or change the default.
+
+Themes are CSS-var overrides plus optional structured props
+(`backgroundImage`, `overlayBackground`, `overlayBlur`) for wallpaper / glass
+effects, plus arbitrary freeform CSS for one-off effects (see `crt`'s
+scanline overlay).
+
+**Built-in commands**
+
+- `ls`, `cd`, `pwd`, `cat`, `echo`, `file`, `help`, `clear`, `exit`, `restart`
+- `mkdir`, `touch`, `cp`, `mv`, `rm`
+- `grep`, `wc`, `find`
+- `whoami`, `id`, `history`
+- `uname`, `date`, `who`, `ps`, `kill`
+- `theme`, `colortest`, `welcome`, `projects`, `version`, `about`
+
 **Shell**
 
 - Pipelines (`|`), redirection (`>`, `>>`, `<`), chaining (`&&`, `||`, `;`)
@@ -36,42 +67,27 @@ drop in yours.
   to clear
 
 ```bash
-ls /bin | grep sh | wc -l
+ls -la /bin | grep un | wc -l
 echo hello > ~/note.txt && cat ~/note.txt
-NAME=joaquin; echo "hello, $NAME"
+NAME=world; echo "hello, $NAME"
 ```
 
 **Virtual filesystem**
 
 - Unix-style permissions (owner/group/mode), per-command identity
-- Guest vs root users with privilege drop/switch (`su`, `sudo`)
-- Mount abstraction: `/proc` and `/dev` are synthetic, `/etc` is a tree; plug
-  your own by implementing `Mount` and calling `kernel.vfs.registerMount(m)`
+- Guest vs root users (if user finds how to escalate)
+- Mounts: `/proc` and `/dev` are synthetic; `/etc`, `/home`, `/root`, `/usr`,
+  `/var` are tree-mounted by dedicated plugins
+- `vfs.appendDir(path, children)` lets any plugin contribute files to a tree
+  owned by another plugin (strict: path must exist; duplicate names throw)
 - `resolve`, `list`, `stat`, `read`, `write`, `mkdir`, `rm`: same contract
   every plugin uses
-
-**Built-in commands**
-
-- `ls`, `cd`, `pwd`, `cat`, `echo`, `file`, `help`, `clear`, `exit`, `restart`
-- `mkdir`, `touch`, `cp`, `mv`, `rm`
-- `grep`, `sort`, `head`, `tail`, `wc`, `uniq`, `cut`, `find`
-- `whoami`, `id`, `su`, `sudo`, `history`
-- `uname`, `date`, `who`, `ps`, `kill`
-- `theme`, `colortest`, `welcome`, `projects`, `version`
-
-`restart` triggers a BIOS-style boot splash.
 
 **ANSI rendering**
 
 - SGR escape parser: basic + bright 16-color, 256-color, 24-bit RGB, bold,
   dim, italic, underline, inverse, strike
 - 16-color palette is theme-aware (CSS vars); 256 and RGB are fixed
-
-**Themes**
-
-Ships with `cappuccino`, `crt`, `dracula`, `graphite`, `gruvbox`, `matrix`,
-`nord`, `synthwave`, `tokyo-night` (default). Swap at runtime via
-`theme <name>`. One module per theme.
 
 ---
 
@@ -83,73 +99,80 @@ Requires Node 22+.
 npm install
 npm run dev          # http://localhost:8080
 npm run build        # production bundle → dist/
-npm run preview      # serve the build
-npm run lint         # eslint .
-npm run format       # prettier . --write
 npm run test:unit    # vitest
 npm run test:e2e     # playwright
 ```
-
-Config lives in `.env` (see `.env.example`). The app runs with no env vars
-set — analytics just no-op.
 
 ---
 
 ## Make it yours
 
-Personal stuff lives in two places: `src/config.ts` for settings, and
-`src/plugins/me/` for personal plugins. Framework code under `src/core/` and
-`src/plugins/*.ts` stays untouched.
+Everything you customize without writing new code lives in these files.
+Framework code under `src/core/` and the non-`me/` plugins under
+`src/plugins/` stays untouched.
 
-| File                           | What's in it                                               |
-| ------------------------------ | ---------------------------------------------------------- |
-| `src/config.ts`                | GitHub username, PostHog key, hostname override            |
-| `src/plugins/me/welcome.ts`    | Banner + bio + links (the landing command)                 |
-| `src/plugins/me/about.ts`      | `about.txt` content + `/bin/about` command                 |
-| `src/plugins/me/contact.ts`    | `contact.txt` content                                      |
-| `src/plugins/me/pwn-profile.ts`| `/root/flag.txt` content                                   |
-| `src/plugins/identity.ts`      | Default user name (`guest`), root password                 |
-| `src/index.html`               | `<title>`, favicon                                         |
-| `src/themes/`                  | Add your own theme or tweak the defaults                   |
-| `.firebaserc`, `firebase.json` | Firebase Hosting config. Update with your project if you deploy there, or delete them if you deploy elsewhere |
+| File                        | What's in it                                             |
+| --------------------------- | -------------------------------------------------------- |
+| `src/config.ts`             | GitHub username, PostHog key, optional hostname override |
+| `src/plugins/me/welcome.ts` | Landing banner + bio + links (the `welcome` command)     |
+| `src/plugins/me/about.ts`   | `about.txt` content + `/bin/about`                       |
+| `src/plugins/me/contact.ts` | `contact.txt` content                                    |
+| `src/system.ts`             | Fictional OS / hardware / firmware / kernel identity     |
+| `src/themes/index.ts`       | `DEFAULT_THEME` — which theme to boot with               |
 
 Recommended path:
 
-1. Clone, `npm install`, `npm run dev`.
-2. Edit `src/config.ts` and the plugins under `src/plugins/me/`.
-3. Pick a host. For Firebase, update `.firebaserc` and add a `FIREBASE_TOKEN`
-   secret to GitHub Actions. For anything else, delete the Firebase files and
-   wire up your own deploy.
-4. Add a plugin for any bespoke command you want (see [Extending](#extending)).
+1. Clone or use as template.
+2. Edit `src/config.ts`.
+3. Edit each `src/plugins/me/*.ts` — swap in your bio, links, etc.
+4. Pick a default theme in `src/themes/index.ts` (`DEFAULT_THEME`).
+5. Optional: rebrand `src/system.ts`
 
 ---
 
 ## Extending
 
+When editing content isn't enough, write a plugin or a theme.
+
 ### Architecture
 
 ```
 src/
+├── config.ts                     personal knobs (github user, posthog key, hostname)
+├── system.ts                     fictional OS / hardware / firmware / kernel identity
 ├── core/
-│   ├── kernel.ts         registers plugins, exposes events + executable registry
-│   ├── shell.ts          pipes, redirs, env, argv dispatch
-│   ├── shell-parser.ts   tokenizer + parser (quotes, |, &&, >, ;)
-│   ├── shell-glob.ts     pathname expansion (*, ?, [...])
-│   ├── vfs.ts            in-memory filesystem with mounts, permissions
-│   ├── terminal.ts       DOM rendering, markup, input handling, history
-│   ├── ansi.ts           SGR escape parser + attrs → CSS
-│   └── color.ts          tiny wrappers: red(s), bold(s), etc.
-├── plugins/              one file per feature, each registers executables
-├── themes/               css-var overrides, registered like plugins
-└── styles.css            :root vars, terminal layout
+│   ├── kernel.ts                 registers plugins, exposes events + executable registry
+│   ├── shell.ts                  pipes, redirs, env, argv dispatch; aliasCat helper
+│   ├── shell-parser.ts           tokenizer + parser (quotes, |, &&, >, ;)
+│   ├── shell-glob.ts             pathname expansion (*, ?, [...])
+│   ├── vfs.ts                    in-memory filesystem with mounts, permissions, appendDir
+│   ├── terminal.ts               DOM rendering, markup, input handling, history
+│   ├── ansi.ts                   SGR escape parser + attrs → CSS
+│   └── color.ts                  tiny wrappers: red(s), bold(s), etc.
+├── plugins/
+│   ├── me/                       your personal plugins (welcome, about, contact)
+│   ├── etc.ts, dev.ts, proc.ts   synthetic /etc, /dev, /proc mounts
+│   ├── home.ts, root.ts, usr.ts, var.ts  tree mounts for userland dirs
+│   ├── coreutils.ts, fsutils.ts, text.ts, find.ts  standard unix utilities
+│   ├── sysinfo.ts                uname, who, ps, kill, date, restart
+│   ├── identity.ts, pwn.ts       identity, privilege escalation easter egg
+│   ├── theme.ts                  theme switching + CSS injection
+│   ├── boot-splash.ts            BIOS-style boot sequence
+│   ├── bash-history.ts           history replay from VFS
+│   ├── projects.ts               live GitHub repo list
+│   ├── fortune.ts, colortest.ts, rm-egg.ts, version.ts  misc
+│   └── index.ts                  plugin registry + install order
+├── themes/                       css-var overrides + optional structured props
+├── styles.css                    terminal layout
+└── index.html                    entry
 ```
 
-`src/core/kernel.ts` is the only thing that knows about plugins. Each plugin
-is a `PluginInstall` function that receives the kernel and calls
-`kernel.installExecutable("/bin/<name>", { describe, exec })`. The shell
-dispatches by path: `echo hi` walks `$PATH`, finds `/bin/echo`, invokes its
-`exec(ctx)`. VFS identity is bound to `ctx.fs` so permission checks happen
-transparently; mounts (`/proc`, `/dev`, `/etc`) compute nodes on demand via
+`src/core/kernel.ts` owns the plugin install loop. Each plugin is a
+`PluginInstall` function that receives the kernel and registers executables
+(`kernel.installExecutable(...)`) and/or mounts (`kernel.registerMount(...)`).
+The shell dispatches by path: `echo hi` walks `$PATH`, finds `/bin/echo`,
+invokes its `exec(ctx)`. VFS identity is bound to `ctx.fs` so permission
+checks happen transparently; mounts compute nodes on demand via
 `Mount.resolve(rel)`.
 
 ### Writing a plugin
@@ -173,12 +196,7 @@ const install: PluginInstall = kernel => {
 export default install;
 ```
 
-Register in `src/plugins/index.ts`:
-
-```ts
-import hello from './hello.js';
-// …add `hello` to the existing `plugins` array export.
-```
+Register in `src/plugins/index.ts`.
 
 The `ctx` argument passed to `exec`:
 
@@ -196,7 +214,9 @@ The `ctx` argument passed to `exec`:
     resolve, read, list, stat,
     write, mkdir, rm, normalize, displayPath
   };
-  term: { clear, toggleClass, corrupt };
+  term: { clear, toggleClass, corrupt, appendEntry };
+  run(cmdline: string): Promise<number>;
+  sleep(ms: number): Promise<void>;
 }
 ```
 
@@ -230,10 +250,62 @@ ctx.stdout(JSON.stringify(await res.json()) + '\n');
 See `src/plugins/coreutils.ts` (`ls`) for a worked flag-parsing example and
 `src/plugins/projects.ts` for a cached fetch.
 
+### Adding files to existing mounts (`vfs.appendDir`)
+
+Root paths like `/home`, `/root`, `/usr`, `/var` are owned by dedicated
+plugins (`src/plugins/home.ts` etc.). Other plugins can drop files into
+those trees with `vfs.appendDir`:
+
+```ts
+import { asGuest, file } from '../core/vfs.js';
+
+const install: PluginInstall = kernel => {
+  kernel.vfs.appendDir('/home/guest', {
+    'notes.txt': asGuest(file('stuff I want to leave lying around\n')),
+  });
+};
+```
+
+Rules:
+
+- The target path must exist and be a directory at call time (the owning
+  plugin must register its mount first; ordering is handled via
+  `src/plugins/index.ts`).
+- Duplicate filenames at the same path throw — the earlier registration
+  wins, loudly.
+- Contributions are re-applied after `reboot()` so the tree stays consistent.
+
+`src/plugins/me/about.ts`, `contact.ts`, and `pwn-profile.ts` are worked
+examples.
+
+### Registering a new root mount
+
+The `home.ts` / `root.ts` / `usr.ts` / `var.ts` plugins show the pattern.
+Add a new one:
+
+```ts
+import type { PluginInstall } from '../core/kernel.js';
+import { dir, file, treeMount } from '../core/vfs.js';
+
+const buildMy = () =>
+  dir({
+    'notes.txt': file('hello from /my\n'),
+  });
+
+const install: PluginInstall = kernel => {
+  kernel.registerMount(treeMount('/my', buildMy));
+};
+
+export default install;
+```
+
+Register in `src/plugins/index.ts`. Other plugins can now
+`vfs.appendDir('/my', ...)` to extend it.
+
 ### Writing a theme
 
-Themes are CSS-var overrides scoped to a `data-theme` attribute.
-`src/themes/solarized.ts`:
+Themes are CSS-var overrides scoped to a `data-theme` attribute, plus a few
+optional structured props. Minimum theme, `src/themes/solarized.ts`:
 
 ```ts
 import type { Theme } from './index.js';
@@ -261,8 +333,31 @@ body[data-theme="solarized"] {
 export default theme;
 ```
 
-Register in `src/themes/index.ts`. Change `DEFAULT_THEME` to make it the
-out-of-box palette. Full variable list: see `:root` in `src/styles.css`.
+Full CSS variable list (from `src/styles.css`): `--bg`, `--fg`,
+`--prompt-host`, `--prompt-cwd`, `--link`, `--cursor-bg`, `--cursor-fg`,
+`--text-shadow`, `--ansi-0` through `--ansi-15`.
+
+Register in `src/themes/index.ts`. Change `DEFAULT_THEME` there to make a
+theme the out-of-box palette.
+
+**Theme props** (optional, composable with the freeform `css`):
+
+```ts
+const theme: Theme = {
+  name: 'my-glass',
+  describe: 'wallpaper + glass',
+  backgroundImage: wallpaperUrl, // import from a .jpg/.png
+  overlayBackground: 'rgba(26, 27, 38, 0.75)',
+  overlayBlur: '10px',
+  css: `body[data-theme="my-glass"] { --bg: #1a1b26; --fg: #c0caf5; /* … */ }`,
+};
+```
+
+`backgroundImage` sets the body background. `overlayBackground` and
+`overlayBlur` render a full-viewport pseudo-element with backdrop-blur on
+top, giving a glassmorphism effect. See `src/themes/jazho76.ts` for a full
+example. One-off effects (scanlines, animations) live in the freeform `css`
+string — see `src/themes/crt.ts`.
 
 ### ANSI + color helpers
 
@@ -311,7 +406,6 @@ they track the active theme; 256/RGB are fixed.
 The framework is MIT licensed, see [LICENSE](LICENSE). Fork it, ship it, do
 what you want.
 
-The content in `src/plugins/welcome.ts`, `src/plugins/site-content.ts`, and
-`src/plugins/projects.ts` (bio, links, copy) is mine. Legally the MIT license
-covers it too, but socially please rip it out and put your own in before
-deploying.
+The content in `src/plugins/me/` (bio, links, copy) and the `jazho76` theme
+are mine. Legally the MIT license covers it too, but socially please rip it
+out and put your own in before deploying.
