@@ -1,7 +1,7 @@
+import { config } from '../config.js';
 import type { PluginInstall } from '../core/kernel.js';
-import { settings } from '../me/settings.js';
 
-const POSTHOG_KEY = settings.posthogKey;
+const POSTHOG_KEY = config.posthogKey;
 const POSTHOG_HOST = 'https://us.i.posthog.com';
 
 declare global {

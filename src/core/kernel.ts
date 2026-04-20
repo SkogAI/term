@@ -1,4 +1,4 @@
-import { settings } from '../me/settings.js';
+import { config } from '../config.js';
 import { plugins } from '../plugins/index.js';
 import type { Ctx, Shell } from './shell.js';
 import { createShell } from './shell.js';
@@ -85,8 +85,8 @@ const BIN_FILE_TYPE =
 const PATH: readonly string[] = ['/bin'];
 
 const resolveHostname = (): string => {
-  if (settings.hostname) {
-    return settings.hostname;
+  if (config.hostname) {
+    return config.hostname;
   }
   if (typeof window !== 'undefined' && window.location?.hostname) {
     return window.location.hostname;

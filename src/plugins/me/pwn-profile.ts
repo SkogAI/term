@@ -1,5 +1,5 @@
-import type { PluginInstall } from '../core/kernel.js';
-import { file } from '../core/vfs.js';
+import type { PluginInstall } from '../../core/kernel.js';
+import { file } from '../../core/vfs.js';
 
 const install: PluginInstall = kernel => {
   kernel.vfs.appendDir('/root', {

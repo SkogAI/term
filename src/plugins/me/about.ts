@@ -1,6 +1,6 @@
-import type { ExecOpts, PluginInstall } from '../core/kernel.js';
-import type { Ctx } from '../core/shell.js';
-import { asGuest, file } from '../core/vfs.js';
+import type { ExecOpts, PluginInstall } from '../../core/kernel.js';
+import type { Ctx } from '../../core/shell.js';
+import { asGuest, file } from '../../core/vfs.js';
 
 const aboutText =
   'software engineer since 2004, experience in c/c++, x86 assembly, .net, java, nodejs, go and rust.\n' +

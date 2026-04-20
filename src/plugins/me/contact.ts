@@ -1,6 +1,6 @@
-import { dim } from '../core/color.js';
-import type { PluginInstall } from '../core/kernel.js';
-import { asGuest, file } from '../core/vfs.js';
+import { dim } from '../../core/color.js';
+import type { PluginInstall } from '../../core/kernel.js';
+import { asGuest, file } from '../../core/vfs.js';
 
 const contactText =
   `${dim('email    ')}[hello@jpinillos.dev](mailto:hello@jpinillos.dev)\n` +

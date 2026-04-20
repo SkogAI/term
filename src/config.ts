@@ -1,4 +1,4 @@
-export const settings = {
+export const config = {
   // GitHub username for the `projects` command. Empty → the command errors.
   githubUser: 'jazho76',
 

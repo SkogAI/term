@@ -1,8 +1,8 @@
+import { config } from '../config.js';
 import { bold, dim, red, yellow } from '../core/color.js';
 import type { PluginInstall } from '../core/kernel.js';
-import { settings } from '../me/settings.js';
 
-const GITHUB_USER = settings.githubUser;
+const GITHUB_USER = config.githubUser;
 const DEFAULT_N = 10;
 
 type Repo = {
@@ -52,7 +52,7 @@ const install: PluginInstall = kernel => {
     describe: 'top public github repos by stars',
     async exec(ctx) {
       if (!GITHUB_USER) {
-        ctx.stderr(red('projects: settings.githubUser is not set') + '\n');
+        ctx.stderr(red('projects: config.githubUser is not set') + '\n');
         return 1;
       }
 

@@ -97,17 +97,17 @@ set — analytics just no-op.
 
 ## Make it yours
 
-To turn this into _your_ site, touch these files. Everything else is the
-framework.
-
-Everything personal lives under `src/me/`. Touch those files and leave the
-framework alone.
+Personal stuff lives in two places: `src/config.ts` for settings, and
+`src/plugins/me/` for personal plugins. Framework code under `src/core/` and
+`src/plugins/*.ts` stays untouched.
 
 | File                           | What's in it                                               |
 | ------------------------------ | ---------------------------------------------------------- |
-| `src/me/settings.ts`           | GitHub username, PostHog key, hostname override            |
-| `src/me/welcome.ts`            | Banner + bio + links (the landing command)                 |
-| `src/me/site-content.ts`       | About text, home/root/usr/var tree                         |
+| `src/config.ts`                | GitHub username, PostHog key, hostname override            |
+| `src/plugins/me/welcome.ts`    | Banner + bio + links (the landing command)                 |
+| `src/plugins/me/about.ts`      | `about.txt` content + `/bin/about` command                 |
+| `src/plugins/me/contact.ts`    | `contact.txt` content                                      |
+| `src/plugins/me/pwn-profile.ts`| `/root/flag.txt` content                                   |
 | `src/plugins/identity.ts`      | Default user name (`guest`), root password                 |
 | `src/index.html`               | `<title>`, favicon                                         |
 | `src/themes/`                  | Add your own theme or tweak the defaults                   |
@@ -116,7 +116,7 @@ framework alone.
 Recommended path:
 
 1. Clone, `npm install`, `npm run dev`.
-2. Edit `src/me/settings.ts`, `src/me/welcome.ts`, `src/me/site-content.ts`.
+2. Edit `src/config.ts` and the plugins under `src/plugins/me/`.
 3. Pick a host. For Firebase, update `.firebaserc` and add a `FIREBASE_TOKEN`
    secret to GitHub Actions. For anything else, delete the Firebase files and
    wire up your own deploy.
