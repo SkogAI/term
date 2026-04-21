@@ -3,7 +3,7 @@ import { bold, dim, red, yellow } from '../core/color.js';
 import type { PluginInstall } from '../core/kernel.js';
 
 const GITHUB_USER = config.githubUser;
-const DEFAULT_N = 10;
+const DEFAULT_N = 6;
 
 type Repo = {
   name: string;
@@ -72,7 +72,9 @@ const install: PluginInstall = kernel => {
       }
 
       if (cache === null) {
-        ctx.stdout(dim('Loading some GitHub repositories…') + '\n');
+        ctx.stdout(
+          dim(`Loading some GitHub repositories from ${GITHUB_USER}…`) + '\n'
+        );
       }
 
       let repos: Repo[];

@@ -3,6 +3,7 @@ import bashHistory from './bash-history.js';
 import bootSplash from './boot-splash.js';
 import colortest from './colortest.js';
 import coreutils from './coreutils.js';
+import demo from './demo.js';
 import dev from './dev.js';
 import etc from './etc.js';
 import find from './find.js';
@@ -55,4 +56,5 @@ export const plugins: PluginInstall[] = [
   bashHistory,
   posthog,
   rmEgg,
+  demo,
 ];

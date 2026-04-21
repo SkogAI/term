@@ -36,4 +36,4 @@ export const themes: readonly Theme[] = [
 ];
 
 /** Edit this to swap the out-of-box palette. */
-export const DEFAULT_THEME: Theme['name'] = jazho76.name;
+export const DEFAULT_THEME: Theme['name'] = tokyoNight.name;

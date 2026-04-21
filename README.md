@@ -10,7 +10,7 @@ other than static files.
 **Demo:** [jpinillos.dev](https://jpinillos.dev). Fork it, strip my content,
 drop in yours.
 
-![Shell Website boot splash and shell session](docs/screenshot.png)
+![Shell Website demo](docs/demo.gif)
 
 ---
 
