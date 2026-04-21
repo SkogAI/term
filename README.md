@@ -1,6 +1,6 @@
 # Shell Website
 
-[![CI](https://github.com/jazho76/shellwebsite/actions/workflows/ci.yml/badge.svg)](https://github.com/jazho76/shellwebsite/actions/workflows/ci.yml)
+[![Vercel](https://img.shields.io/github/deployments/jazho76/shellwebsite/production?label=vercel&logo=vercel)](https://vercel.com/jpinilloslrs-projects/shellwebsite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A personal website that looks and feels like a shell. Your content is served
