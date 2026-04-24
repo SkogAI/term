@@ -7,8 +7,9 @@ as commands and files. Everything runs in the browser with static files.
 
 ![Shell Website demo](docs/demo.gif)
 
-**Demo:** [jpinillos.dev](https://jpinillos.dev). Fork it, fill in the
-placeholders in `src/plugins/me/*.ts` and `src/config.ts`.
+Fork it, fill in the placeholders in `src/plugins/me/*.ts` and `src/config.ts`.
+
+**Demo:** [jpinillos.dev](https://jpinillos.dev)
 
 ---
 
@@ -27,8 +28,8 @@ placeholders in `src/plugins/me/*.ts` and `src/config.ts`.
 **Your content, as commands and files**
 
 - Bio + links served as the landing `welcome` command
-- Content commands: `about`, `projects` (live GitHub repo list), plus any
-  you add
+- Content commands: `about`, `contact`, `projects` (live GitHub repo list),
+  plus any you add
 - Content files: `~/about.txt`, `~/contact.txt`
 - Markdown-style links (`[text](url)`) render as clickable anchors
 - Edit in `src/plugins/me/*.ts` and `src/config.ts`
@@ -108,7 +109,7 @@ scanline overlay).
 - `grep`, `wc`, `find`
 - `whoami`, `id`, `history`
 - `uname`, `date`, `who`, `ps`, `kill`
-- `theme`, `colortest`, `welcome`, `projects`, `version`, `about`
+- `theme`, `colortest`, `welcome`, `projects`, `version`, `about`, `contact`
 
 **Shell**
 
@@ -192,7 +193,7 @@ When editing content isn't enough, write a plugin or a theme.
 
 ```
 src/
-├── config.ts                     personal knobs (github user, posthog key, hostname)
+├── config.ts                     personal knobs (github user, posthog key, hostname, title)
 ├── system.ts                     fictional OS / hardware / firmware / kernel identity
 ├── core/
 │   ├── kernel.ts                 registers plugins, exposes events + executable registry
