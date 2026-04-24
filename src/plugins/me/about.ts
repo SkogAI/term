@@ -3,11 +3,11 @@ import { aliasCat } from '../../core/shell.js';
 import { asGuest, file } from '../../core/vfs.js';
 
 const aboutText =
-  'software engineer since 2004, experience in c/c++, x86 assembly, .net, java, nodejs, go and rust.\n' +
-  'interests: systems, low-level, security, binary exploitation, infrastructure, tool development.';
+  'software abuser since 2000, experience in memes, AI enthusiast and open-source user.\n' +
+  '[@todo: add more info here]';
 
 const install: PluginInstall = kernel => {
-  kernel.vfs.appendDir('/home/guest', {
+  kernel.vfs.appendDir('/home/skogix', {
     'about.txt': asGuest(file(aboutText)),
   });
 

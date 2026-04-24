@@ -99,7 +99,7 @@ const kernel = {} as Kernel;
 const vfs = createVfs();
 kernel.vfs = vfs;
 
-let currentName = 'guest';
+let currentName = 'skogix';
 let bootTime = Date.now();
 let cwd = HOME;
 let cachedHostname = resolveHostname();
@@ -253,7 +253,7 @@ kernel.resetVfs = () => {
 
 kernel.reboot = async () => {
   kernel.resetVfs();
-  kernel.identity.switchTo('guest');
+  kernel.identity.switchTo('skogix');
   kernel.setCwd(HOME);
   await kernel.emit('reboot', undefined);
   await kernel.emit('boot-ready', { isReboot: true });

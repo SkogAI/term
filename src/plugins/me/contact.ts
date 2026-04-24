@@ -3,12 +3,12 @@ import type { PluginInstall } from '../../core/kernel.js';
 import { asGuest, file } from '../../core/vfs.js';
 
 const contactText =
-  `${dim('email    ')}[hello@jpinillos.dev](mailto:hello@jpinillos.dev)\n` +
-  `${dim('github   ')}[github.com/jazho76](https://github.com/jazho76)\n` +
-  `${dim('linkedin ')}[linkedin.com/in/joaquin-pinillos](https://www.linkedin.com/in/joaquin-pinillos-31b8a0158/)`;
+  `${dim('email    ')}[hello@skogai.dev](mailto:hello@skogai.dev)\n` +
+  `${dim('github   ')}[github.com/SkogAI](https://github.com/SkogAI)\n` +
+  `${dim('linkedin ')}[linkedin.com/in/SkogAI](https://www.linkedin.com/in/SkogAI)`;
 
 const install: PluginInstall = kernel => {
-  kernel.vfs.appendDir('/home/guest', {
+  kernel.vfs.appendDir('/home/skogix', {
     'contact.txt': asGuest(file(contactText)),
   });
 };
