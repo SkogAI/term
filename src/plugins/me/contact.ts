@@ -1,6 +1,5 @@
 import { dim } from '../../core/color.js';
 import type { PluginInstall } from '../../core/kernel.js';
-import { aliasCat } from '../../core/shell.js';
 import { asGuest, file } from '../../core/vfs.js';
 
 const contactText =
@@ -11,11 +10,6 @@ const contactText =
 const install: PluginInstall = kernel => {
   kernel.vfs.appendDir('/home/skogix', {
     'contact.txt': asGuest(file(contactText)),
-  });
-
-  kernel.installExecutable('/bin/contact', {
-    describe: 'contact info',
-    exec: aliasCat('~/contact.txt'),
   });
 };
 

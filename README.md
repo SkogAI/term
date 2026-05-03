@@ -18,7 +18,6 @@ drop in yours.
 - [Features](#features)
 - [Quick start](#quick-start)
 - [Make it yours](#make-it-yours)
-- [Make it weird](#make-it-weird)
 - [Extending](#extending)
 - [License](#license)
 
@@ -29,8 +28,8 @@ drop in yours.
 **Your content, as commands and files**
 
 - Bio + links served as the landing `welcome` command
-- Content commands: `about`, `contact`, `projects` (live GitHub repo list),
-  plus any you add
+- Content commands: `about`, `projects` (live GitHub repo list), plus any
+  you add
 - Content files: `~/about.txt`, `~/contact.txt`
 - Markdown-style links (`[text](url)`) render as clickable anchors
 - Edit in `src/plugins/me/*.ts` and `src/config.ts`
@@ -110,7 +109,7 @@ scanline overlay).
 - `grep`, `wc`, `find`
 - `whoami`, `id`, `history`
 - `uname`, `date`, `who`, `ps`, `kill`
-- `theme`, `colortest`, `welcome`, `projects`, `version`, `about`, `contact`
+- `theme`, `colortest`, `welcome`, `projects`, `version`, `about`
 
 **Shell**
 
@@ -167,14 +166,14 @@ Everything you customize without writing new code lives in these files.
 Framework code under `src/core/` and the non-`me/` plugins under
 `src/plugins/` stays untouched.
 
-| File                        | What's in it                                               |
-| --------------------------- | ---------------------------------------------------------- |
-| `src/config.ts`             | GitHub username, PostHog key, hostname override, tab title |
-| `src/plugins/me/welcome.ts` | Landing banner + bio + links (the `welcome` command)       |
-| `src/plugins/me/about.ts`   | `about.txt` content + `/bin/about`                         |
-| `src/plugins/me/contact.ts` | `contact.txt` content + `/bin/contact`                     |
-| `src/system.ts`             | Fictional OS / hardware / firmware / kernel identity       |
-| `src/themes/index.ts`       | `DEFAULT_THEME` — which theme to boot with                 |
+| File                        | What's in it                                             |
+| --------------------------- | -------------------------------------------------------- |
+| `src/config.ts`             | GitHub username, PostHog key, optional hostname override |
+| `src/plugins/me/welcome.ts` | Landing banner + bio + links (the `welcome` command)     |
+| `src/plugins/me/about.ts`   | `about.txt` content + `/bin/about`                       |
+| `src/plugins/me/contact.ts` | `contact.txt` content                                    |
+| `src/system.ts`             | Fictional OS / hardware / firmware / kernel identity     |
+| `src/themes/index.ts`       | `DEFAULT_THEME` — which theme to boot with               |
 
 Recommended path:
 
@@ -186,16 +185,6 @@ Recommended path:
 
 ---
 
-## Make it weird
-
-Half the fun of shipping a shell site is leaving your own trail. Drop files
-into existing mounts with `vfs.appendDir` (see `src/plugins/me/about.ts`), or
-register a new mount for a whole new tree (see `src/plugins/root.ts`). Hidden
-files, fake logs, gated commands, unreachable-looking scripts. It's your
-shell.
-
----
-
 ## Extending
 
 When editing content isn't enough, write a plugin or a theme.
@@ -204,7 +193,7 @@ When editing content isn't enough, write a plugin or a theme.
 
 ```
 src/
-├── config.ts                     personal knobs (github user, posthog key, hostname, title)
+├── config.ts                     personal knobs (github user, posthog key, hostname)
 ├── system.ts                     fictional OS / hardware / firmware / kernel identity
 ├── core/
 │   ├── kernel.ts                 registers plugins, exposes events + executable registry
@@ -468,7 +457,7 @@ they track the active theme; 256/RGB are fixed.
 
 ## License
 
-This project is MIT licensed, see [LICENSE](LICENSE). Fork it, ship it, do
+The framework is MIT licensed, see [LICENSE](LICENSE). Fork it, ship it, do
 what you want.
 
 The content in `src/plugins/me/` (bio, links, copy) and the `skogai` theme

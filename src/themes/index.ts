@@ -38,4 +38,4 @@ export const themes: readonly Theme[] = [
 ];
 
 /** Edit this to swap the out-of-box palette. */
-export const DEFAULT_THEME: Theme['name'] = graphite.name;
+export const DEFAULT_THEME: Theme['name'] = tokyoNight.name;

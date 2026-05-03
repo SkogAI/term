@@ -14,7 +14,7 @@ test.describe('resolver: bare names via $PATH', () => {
     ['date', /\d{4}/],
     ['file /bin/ls', /ELF/],
     ['koan', /\S/],
-    ['about', /\S/],
+    ['about', /software engineer/i],
   ];
   for (const [cmd, re] of cases) {
     test(`bare \`${cmd}\``, async ({ page }) => {
@@ -42,7 +42,7 @@ test.describe('resolver: /bin/<name> absolute path', () => {
     ['/bin/date', /\d{4}/],
     ['/bin/history', /ls -la/],
     ['/bin/koan', /\S/],
-    ['/bin/about', /\S/],
+    ['/bin/about', /software engineer/i],
     ['/bin/exit', /logout/],
     ['/bin/rm', /missing operand/],
   ];
