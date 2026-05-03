@@ -7,16 +7,16 @@ const section = green;
 
 const CONTENT: string[] = [
   '',
-  bold('joaquin pinillos'),
-  dim('software engineer: systems, low-level, tooling'),
+  bold('skogix'),
+  dim('ai enthusiast · systems tinkerer · open-source enjoyer'),
   '',
   section('background'),
-  `${bullet} c/c++, x86, systems`,
-  `${bullet} frontend/backend (typescript, nodejs, .net)`,
+  `${bullet} ai, ml, and the things that make them tick`,
+  `${bullet} systems programming (c/c++, low-level tooling)`,
+  `${bullet} frontend/backend (typescript, nodejs)`,
   '',
   section('current focus'),
-  `${bullet} frontend platform at Forge (startup)`,
-  `${bullet} platform development`,
+  `${bullet} ai tooling and infrastructure`,
   `${bullet} systems programming`,
   `${bullet} security and exploitation`,
   `${bullet} understanding abstractions by breaking them`,
@@ -27,15 +27,15 @@ const CONTENT: string[] = [
   `${bullet} iterate: explore → understand → implement`,
   '',
   section('reach'),
-  `${bullet} github:   [github.com/jazho76](https://github.com/jazho76)`,
-  `${bullet} linkedin: [linkedin.com/in/joaquin-pinillos](https://linkedin.com/in/joaquin-pinillos)`,
-  `${bullet} email:    [hello@jpinillos.dev](mailto:hello@jpinillos.dev)`,
+  `${bullet} github:   [github.com/SkogAI](https://github.com/SkogAI)`,
+  `${bullet} linkedin: [linkedin.com/in/SkogAI](https://linkedin.com/in/SkogAI)`,
+  `${bullet} email:    [hello@skogai.dev](mailto:hello@skogai.dev)`,
   '',
   section('tip'),
   `${bullet} try: ${cmd('about')}, ${cmd('projects')}, ${cmd('help')}`,
   '',
   dim(
-    'source code for this terminal lives at [github.com/jazho76/shellwebsite](https://github.com/jazho76/shellwebsite)'
+    'source code for this terminal lives at [github.com/SkogAI/term](https://github.com/SkogAI/term)'
   ),
 ];
 

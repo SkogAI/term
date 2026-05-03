@@ -2,13 +2,13 @@ import type { Theme } from './index.js';
 import wallpaperUrl from './wallpaper_low.jpg';
 
 const theme: Theme = {
-  name: 'jazho76',
+  name: 'skogai',
   describe: 'glassy, blurred, and colorful',
   backgroundImage: wallpaperUrl,
   overlayBackground: 'rgba(26, 27, 38, 0.75)',
   overlayBlur: '10px',
   css: `
-body[data-theme="jazho76"] {
+body[data-theme="skogai"] {
   --bg: #1a1b26;
   --fg: #c0caf5;
   --prompt-host: #9ece6a;

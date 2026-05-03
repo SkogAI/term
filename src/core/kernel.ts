@@ -75,7 +75,8 @@ export interface Kernel {
 export type PluginInstall = (kernel: Kernel) => void;
 
 const IDENTITIES: Record<string, { uid: number; gid: number }> = {
-  guest: { uid: 1000, gid: 1000 },
+  skogix: { uid: 1000, gid: 1000 },
+  guest: { uid: 1001, gid: 1001 },
   root: { uid: 0, gid: 0 },
 };
 

@@ -9,9 +9,9 @@ const THEMES = [
   'espresso',
   'graphite',
   'gruvbox',
-  'jazho76',
   'matrix',
   'nord',
+  'skogai',
   'synthwave',
   'tokyo-night',
 ];

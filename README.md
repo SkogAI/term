@@ -1,6 +1,6 @@
 # Shell Website
 
-[![Vercel](https://img.shields.io/github/deployments/jazho76/shellwebsite/production?label=vercel&logo=vercel)](https://vercel.com/jpinilloslrs-projects/shellwebsite)
+[![Vercel](https://img.shields.io/github/deployments/SkogAI/term/production?label=vercel&logo=vercel)](https://vercel.com/skogai/term)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A static website that looks and feels like a real shell. Your content is served
@@ -8,7 +8,7 @@ as commands and files. Everything runs in the browser with static files.
 
 ![Shell Website demo](docs/demo.gif)
 
-**Demo:** [jpinillos.dev](https://jpinillos.dev). Fork it, strip my content,
+**Demo:** [skogai.dev](https://skogai.dev). Fork it, strip my content,
 drop in yours.
 
 ---
@@ -37,7 +37,7 @@ drop in yours.
 **Themes**
 
 Framework themes: `catppuccin-mocha`, `crt`, `dracula`, `espresso`, `graphite`,
-`gruvbox`, `matrix`, `nord`, `synthwave`, `tokyo-night`. Plus `jazho76` as an example
+`gruvbox`, `matrix`, `nord`, `synthwave`, `tokyo-night`. Plus `skogai` as an example
 of a custom theme. Swap at runtime via `theme <name>`. One
 module per theme. Update `src/themes/index.ts` to add your own or change the default.
 
@@ -72,8 +72,8 @@ module per theme. Update `src/themes/index.ts` to add your own or change the def
   </tr>
   <tr>
     <td align="center">
-      <a href="docs/themes/jazho76.png"><img src="docs/themes/jazho76.png" width="320" alt="jazho76"></a><br>
-      <sub><code>jazho76</code></sub>
+      <a href="docs/themes/skogai.png"><img src="docs/themes/skogai.png" width="320" alt="skogai"></a><br>
+      <sub><code>skogai</code></sub>
     </td>
     <td align="center">
       <a href="docs/themes/matrix.png"><img src="docs/themes/matrix.png" width="320" alt="matrix"></a><br>
@@ -409,7 +409,7 @@ const theme: Theme = {
 
 `backgroundImage` sets the body background. `overlayBackground` and
 `overlayBlur` render a full-viewport pseudo-element with backdrop-blur on
-top, giving a glassmorphism effect. See `src/themes/jazho76.ts` for a full
+top, giving a glassmorphism effect. See `src/themes/skogai.ts` for a full
 example. One-off effects (scanlines, animations) live in the freeform `css`
 string — see `src/themes/crt.ts`.
 
@@ -460,7 +460,7 @@ they track the active theme; 256/RGB are fixed.
 The framework is MIT licensed, see [LICENSE](LICENSE). Fork it, ship it, do
 what you want.
 
-The content in `src/plugins/me/` (bio, links, copy) and the `jazho76` theme
+The content in `src/plugins/me/` (bio, links, copy) and the `skogai` theme
 are mine. Legally the MIT license covers it too, but socially please rip it
 out and put your own in before deploying.
 

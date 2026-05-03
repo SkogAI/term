@@ -4,9 +4,9 @@ import dracula from './dracula.js';
 import espresso from './espresso.js';
 import graphite from './graphite.js';
 import gruvbox from './gruvbox.js';
-import jazho76 from './jazho76.js';
 import matrix from './matrix.js';
 import nord from './nord.js';
+import skogai from './skogai.js';
 import synthwave from './synthwave.js';
 import tokyoNight from './tokyo-night.js';
 
@@ -30,9 +30,9 @@ export const themes: readonly Theme[] = [
   espresso,
   graphite,
   gruvbox,
-  jazho76,
   matrix,
   nord,
+  skogai,
   synthwave,
   tokyoNight,
 ];

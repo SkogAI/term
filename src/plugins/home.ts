@@ -3,6 +3,17 @@ import { asGuest, dir, file, treeMount } from '../core/vfs.js';
 
 const buildHome = () =>
   dir({
+    skogix: dir(
+      {
+        '.bashrc': file(
+          "# this shell doesn't read me yet. but nice of you to check.\n"
+        ),
+        '.bash_history': file(
+          'ls -la\ncat /etc/passwd\ncd /tmp\nls -a\n/tmp/.pwn\nwhoami\nclear\nsudo su\nrm -rf /\ntheme crt\nexit'
+        ),
+      },
+      { owner: 'skogix', group: 'skogix', mode: 0o700 }
+    ),
     guest: asGuest(
       dir({
         '.bashrc': file(
