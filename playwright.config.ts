@@ -7,12 +7,12 @@ export default defineConfig({
   fullyParallel: true,
   reporter: process.env.CI ? 'github' : 'list',
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: 'https://3000.skogix.se',
     trace: 'retain-on-failure',
   },
   webServer: {
-    command: 'npm run build && npm run preview -- --port 4173 --strictPort',
-    port: 4173,
+    command: 'npm run build && npm run preview -- --port 3000 --strictPort',
+    port: 3000,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
     stdout: 'ignore',
