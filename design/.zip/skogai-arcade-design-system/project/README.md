@@ -13,13 +13,13 @@ Use semantic CSS variables (`--sk-primary`, `--sk-fg`, `--sk-card`) before raw p
 
 ## Files
 
-| File | Purpose |
-|---|---|
+| File                  | Purpose                                                                                |
+| --------------------- | -------------------------------------------------------------------------------------- |
 | `colors_and_type.css` | Tokens: palette, semantic roles, type scale, spacing, radius, shadows, glow utilities. |
-| `components.css`      | Buttons, badges, plaques, quest strip, cards, inputs, terminal block. |
-| `DESIGN.md`           | Source brief — atmosphere, layout principles, do's & don'ts. |
-| `preview/*.html`      | Design-system reference cards (Colors, Type, Spacing, Components, Brand). |
-| `assets/`             | Reference scenes for the three cabinets. |
+| `components.css`      | Buttons, badges, plaques, quest strip, cards, inputs, terminal block.                  |
+| `DESIGN.md`           | Source brief — atmosphere, layout principles, do's & don'ts.                           |
+| `preview/*.html`      | Design-system reference cards (Colors, Type, Spacing, Components, Brand).              |
+| `assets/`             | Reference scenes for the three cabinets.                                               |
 
 ---
 
@@ -51,13 +51,13 @@ Arcade, neon, pixel-art, playful, retro, celebratory — but **disciplined**. Th
 
 ### Surface ladder (dark-canvas)
 
-| Level | Token | Use |
-|---|---|---|
-| Void / canvas | `--sk-bg` (#0b0716) | Outside the cabinet, page background. |
-| Shell | `--sk-shell` (#1a1030) | App frame, persistent chrome. |
-| Panel | `--sk-bg-2` (#140a26) | Embedded module backdrops. |
-| Card | `--sk-card` (#211640) | Contained group, plaque body. |
-| Raised | `--sk-card-2` (#2c1d54) | Hover, selected, dialog cluster. |
+| Level         | Token                   | Use                                   |
+| ------------- | ----------------------- | ------------------------------------- |
+| Void / canvas | `--sk-bg` (#0b0716)     | Outside the cabinet, page background. |
+| Shell         | `--sk-shell` (#1a1030)  | App frame, persistent chrome.         |
+| Panel         | `--sk-bg-2` (#140a26)   | Embedded module backdrops.            |
+| Card          | `--sk-card` (#211640)   | Contained group, plaque body.         |
+| Raised        | `--sk-card-2` (#2c1d54) | Hover, selected, dialog cluster.      |
 
 Step by **tone first, shadow last**. Shadows are reserved for overlays (popovers, modals).
 
@@ -91,16 +91,16 @@ Square is the default. `0` for pixel-perfect plates, `2px` for controls, `4px` f
 
 The Skogai icon system is **glyph-led, not illustration-led**. Use unicode arcade glyphs and short pixel ideograms before reaching for a custom SVG.
 
-| Role | Glyph | Use |
-|---|---|---|
-| Start / play | `▶` | CTAs that launch a quest, deploy, or run. |
-| Stop / cancel | `✕` | Destructive close, abort. |
-| Confirm | `✓` | Quest done, validation passed. |
-| Active / energized | `⚡` | Boss spawn, live state, urgency. |
-| Locked | `🔒` (or `▣` outlined) | Gated content. |
-| Reward / featured | `★` | New, highlighted, daily. |
-| Forward / arrow | `▸` | Inline emphasis before a label. |
-| Status dot | `▣ / ▢` | Online / offline pill prefix. |
+| Role               | Glyph                  | Use                                       |
+| ------------------ | ---------------------- | ----------------------------------------- |
+| Start / play       | `▶`                    | CTAs that launch a quest, deploy, or run. |
+| Stop / cancel      | `✕`                    | Destructive close, abort.                 |
+| Confirm            | `✓`                    | Quest done, validation passed.            |
+| Active / energized | `⚡`                   | Boss spawn, live state, urgency.          |
+| Locked             | `🔒` (or `▣` outlined) | Gated content.                            |
+| Reward / featured  | `★`                    | New, highlighted, daily.                  |
+| Forward / arrow    | `▸`                    | Inline emphasis before a label.           |
+| Status dot         | `▣ / ▢`                | Online / offline pill prefix.             |
 
 When a custom icon is needed, draw it on an **8×8 or 16×16 pixel grid**, single weight, no anti-aliasing. Match the active neon (`currentColor` + glow shadow). Keep the silhouette readable at 16px.
 
@@ -124,11 +124,11 @@ See `preview/components.html` for live examples. Class prefix: `.sk-`.
 
 Skogai is the parent arcade. Three cabinets sit on the same chassis:
 
-| Cabinet | Accent | Use it for |
-|---|---|---|
-| **Sudo Hero** | violet `#b26bff` | Solo quests, terminal-led flows, personal dashboards. |
-| **Wi-Fi Wizards** | cyan `#4ee2ff` | Co-op multiplayer, network/sync, party UI. |
-| **Honkers & Hackers** | yellow `#ffd23f` | Time-attack, casual chaos, daily mini-games. |
+| Cabinet               | Accent           | Use it for                                            |
+| --------------------- | ---------------- | ----------------------------------------------------- |
+| **Sudo Hero**         | violet `#b26bff` | Solo quests, terminal-led flows, personal dashboards. |
+| **Wi-Fi Wizards**     | cyan `#4ee2ff`   | Co-op multiplayer, network/sync, party UI.            |
+| **Honkers & Hackers** | yellow `#ffd23f` | Time-attack, casual chaos, daily mini-games.          |
 
 Switch cabinets by overriding `--sk-primary` on the page root; never blend two on one screen.
 

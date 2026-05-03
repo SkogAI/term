@@ -31,15 +31,15 @@ Adjust the relative path based on where the new HTML file lives.
 
 ## Component cheat sheet
 
-| Need | Use |
-|---|---|
-| Hero CTA | `<button class="sk-btn sk-btn-primary">▶ START</button>` |
-| Utility action | `.sk-btn.sk-btn-outline` or `.sk-btn-ghost` |
-| Live status pill | `<span class="sk-badge sk-badge-cyan">▣ ONLINE</span>` |
-| Score / HP readout | `.sk-plaque.sk-plaque-violet` (label + value) |
-| Bottom mission rail | `.sk-quest-strip` containing 2–4 `.sk-quest` items |
-| Description card | `.sk-card.sk-card-default` with `.sk-card-eyebrow` + `-title` + `-body` |
-| Terminal output | `<pre class="sk-terminal-block">…</pre>` |
+| Need                | Use                                                                     |
+| ------------------- | ----------------------------------------------------------------------- |
+| Hero CTA            | `<button class="sk-btn sk-btn-primary">▶ START</button>`                |
+| Utility action      | `.sk-btn.sk-btn-outline` or `.sk-btn-ghost`                             |
+| Live status pill    | `<span class="sk-badge sk-badge-cyan">▣ ONLINE</span>`                  |
+| Score / HP readout  | `.sk-plaque.sk-plaque-violet` (label + value)                           |
+| Bottom mission rail | `.sk-quest-strip` containing 2–4 `.sk-quest` items                      |
+| Description card    | `.sk-card.sk-card-default` with `.sk-card-eyebrow` + `-title` + `-body` |
+| Terminal output     | `<pre class="sk-terminal-block">…</pre>`                                |
 
 ## Layout principles
 
