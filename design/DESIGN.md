@@ -43,11 +43,11 @@ Use semantic utilities such as `bg-background`, `bg-card`, `text-foreground`, `t
 
 Use the extracted type rhythm around 10px, 12px, 14px, 16px, 18px, 20px. Product-native type: expressive enough for hierarchy, restrained enough for repeated UI.
 
-| Role | Size | Guidance |
-| --- | ---: | --- |
-| Page title | 60px | Establish the active task without becoming a marketing hero. |
-| Body | 12px | Use for rows, descriptions, and standard UI copy. |
-| Label/metadata | 10px | Keep readable, sentence case, and quieter than content. |
+| Role           | Size | Guidance                                                     |
+| -------------- | ---: | ------------------------------------------------------------ |
+| Page title     | 60px | Establish the active task without becoming a marketing hero. |
+| Body           | 12px | Use for rows, descriptions, and standard UI copy.            |
+| Label/metadata | 10px | Keep readable, sentence case, and quieter than content.      |
 
 - Keep app chrome quieter than the main content.
 - Use sentence-case UI labels with normal tracking unless the references clearly require another style.
@@ -64,14 +64,14 @@ Recurring component families: card. Start from shadcn/ui primitives and tune spa
 - Status and badges: pair color with label or icon; status color should not become the visual theme.
 - Inputs and filters: keep them attached to the relevant region, not floating as unrelated islands.
 
-| Component | Anatomy | Interaction and State | Avoid |
-| --- | --- | --- | --- |
-| Buttons | 2px radius, compact padding, clear label/icon pairing. | Primary only for the main action; secondary/ghost for utilities. | Multiple equally loud actions or one-off color fills. |
-| Cards/panels | 4px panel radius, role-based containment, semantic surfaces. | Use border, tone, or subtle elevation according to level. | Boxing every region with the same detached card treatment. |
-| Lists/rows | Shared left edges, quiet metadata, trailing actions aligned to a stable column. | Hover and selected states should use `muted`, `accent`, or `primary` sparingly. | Replacing list-led surfaces with KPI blocks or hero slabs. |
-| Navigation/header | Proportional shell chrome with selected state visible but subordinate. | Keep focus and active states crisp with `ring-ring` and semantic borders. | Oversized branded topbars, tracked uppercase labels, or theatrical badges. |
-| Inputs/filters | Attached to the region they refine, with clear labels and readable placeholder text. | Preserve touch targets and focus visibility. | Floating unrelated controls or cramped icon-only filters. |
-| Badges/status | Small, labeled, and paired with icon or text when color carries meaning. | Status color supports state; it does not become the global palette. | Broad tinted status panels or unlabeled color-only signals. |
+| Component         | Anatomy                                                                              | Interaction and State                                                           | Avoid                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Buttons           | 2px radius, compact padding, clear label/icon pairing.                               | Primary only for the main action; secondary/ghost for utilities.                | Multiple equally loud actions or one-off color fills.                      |
+| Cards/panels      | 4px panel radius, role-based containment, semantic surfaces.                         | Use border, tone, or subtle elevation according to level.                       | Boxing every region with the same detached card treatment.                 |
+| Lists/rows        | Shared left edges, quiet metadata, trailing actions aligned to a stable column.      | Hover and selected states should use `muted`, `accent`, or `primary` sparingly. | Replacing list-led surfaces with KPI blocks or hero slabs.                 |
+| Navigation/header | Proportional shell chrome with selected state visible but subordinate.               | Keep focus and active states crisp with `ring-ring` and semantic borders.       | Oversized branded topbars, tracked uppercase labels, or theatrical badges. |
+| Inputs/filters    | Attached to the region they refine, with clear labels and readable placeholder text. | Preserve touch targets and focus visibility.                                    | Floating unrelated controls or cramped icon-only filters.                  |
+| Badges/status     | Small, labeled, and paired with icon or text when color carries meaning.             | Status color supports state; it does not become the global palette.             | Broad tinted status panels or unlabeled color-only signals.                |
 
 ## 5. Layout Principles
 
@@ -105,12 +105,12 @@ Context priority: user intent, existing product IA, and route semantics override
 
 A disciplined surface ladder across background, shell, panels, cards, and selected states.
 
-| Level | Treatment | Use |
-| --- | --- | --- |
-| Base | `bg-background`, no shadow | Page canvas and persistent shell. |
-| Embedded | `bg-card` or `bg-muted`, subtle separators | Main regions, lists, and quiet modules. |
-| Panel | Border or tone step, restrained radius | Cards, grouped controls, and secondary modules. |
-| Overlay | Stronger shadow plus focus ring | Dialogs, popovers, menus, and transient focus. |
+| Level    | Treatment                                  | Use                                             |
+| -------- | ------------------------------------------ | ----------------------------------------------- |
+| Base     | `bg-background`, no shadow                 | Page canvas and persistent shell.               |
+| Embedded | `bg-card` or `bg-muted`, subtle separators | Main regions, lists, and quiet modules.         |
+| Panel    | Border or tone step, restrained radius     | Cards, grouped controls, and secondary modules. |
+| Overlay  | Stronger shadow plus focus ring            | Dialogs, popovers, menus, and transient focus.  |
 
 Radius rhythm: 2px, 4px, 6px. Persistent shell regions should stay flatter than overlays. Use borders, tone shifts, and spacing before strong shadow. Reserve stronger elevation for popovers, dialogs, sheets, and temporary focus.
 
