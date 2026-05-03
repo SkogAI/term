@@ -94,11 +94,8 @@ export function globExpand(
   if (pattern.startsWith('/')) {
     rest = pattern.slice(1);
   } else if (pattern === '~' || pattern.startsWith('~/')) {
-    const resolved = vfs.normalize('~', cwd);
-    if (resolved === null) {
-      return [unescape(pattern)];
-    }
-    root = resolved;
+    const home = identity.name === 'root' ? '/root' : `/home/${identity.name}`;
+    root = home;
     rest = pattern === '~' ? '' : pattern.slice(2);
   } else {
     root = cwd;
