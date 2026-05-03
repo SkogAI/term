@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --port 8080",
+    "dev": "vite --port 3000",
     "prebuild": "npm run lint",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
